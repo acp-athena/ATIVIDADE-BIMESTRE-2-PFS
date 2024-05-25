@@ -1,0 +1,37 @@
+<script src="/js/usuarios/listagem.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+
+<h1>Usuários cadastrados</h1>
+<a class="btn btn-secondary" style="max-width: 200px;" href="usuarios/cadastrar">Novo Usuário</a>
+
+<hr>
+<div>
+    <button id="btnExportarExcel">Exportar para excel</button>
+</div>
+    <div>
+        <table class="table table-striped" id="tableUsuario">
+            <thead>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Nome</th>
+                <th>Perfil</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < lista.length; i++)  { %>
+                    <tr>
+                        <td><%= lista[i].usuarioId %></td>
+                        <td><%= lista[i].usuarioEmail %></td>
+                        <td><%= lista[i].usuarioNome %></td>
+                        <td><%= lista[i].perfilId %></td>
+                        <td><%= lista[i].usuarioAtivo %></td>
+                        <td>
+                            <a href="/usuarios/alterar/<%= lista[i].usuarioId %>" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <button data-codigoexclusao="<%= lista[i].usuarioId %>" class="btn btn-danger btnExclusao"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>

@@ -1,0 +1,46 @@
+<link href="/css/printf.css" media="print" rel="stylesheet" type="text/css">
+<h1>Pedidos realizados</h1>
+<div>
+    <div>
+        <button id="btnExportarExcel" class="btn btn-primary">Exportar para Excel</button>
+        <button onclick="window.print()" id="btnExportarPDF" class="btn btn-primary">Exportar para PDF</button>
+    </div>
+    <div id="divFiltros" style="margin-bottom: 15px;">
+    <div class="input-group">
+        <label>Filtro:</label>
+        <input id="filtro" placeholder="Digite um valor a ser filtrado" class="form-control" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+          <button id="btnEscolherFiltro" class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtros</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item itemFiltro" data-nome="Nº pedido" data-valor="2">Nº do pedido</a>
+            <a class="dropdown-item itemFiltro" data-nome="Nome do produto" data-valor="1">Nome do produto</a>
+          </div>
+          <button class="btn btn-outline-secondary" id="btnFiltrar"  type="button"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+    <table id="tabelaPedidos" class="table table-striped">
+        <thead>
+            <th>Nº pedido</th>
+            <th>Data</th>
+            <th>Produto</th>
+            <th>Valor unitario</th>
+            <th>Quantidade</th>
+            <th>Valor total</th>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i<pedidos.length; i++){ %>
+                <tr>
+                    <td><%= pedidos[i].pedidoId%></td>
+                    <td><%= pedidos[i].pedidoData.toLocaleString()%></td>
+                    <td><%= pedidos[i].produtoNome%></td>
+                    <td>R$<%= pedidos[i].pedidoItemValor%></td>
+                    <td><%= pedidos[i].pedidoItemQuantidade%></td>
+                    <td>R$<%= pedidos[i].pedidoItemValorTotal%></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+<script src="/js/pedido/listagem.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
